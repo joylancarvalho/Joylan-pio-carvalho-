@@ -42,13 +42,6 @@
         line-height: 1.7;
     }
 
-    img {
-        width: 100%;
-        border-radius: 22px;
-        margin: 22px 0;
-        box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-    }
-
     button {
         margin: 16px;
         padding: 14px 36px;
@@ -83,19 +76,10 @@
         from { transform: scale(0.85); opacity:0; }
         to { transform: scale(1); opacity:1; }
     }
-
-    canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-    }
 </style>
 </head>
 
 <body>
-
-<canvas id="confetti"></canvas>
 
 <div class="box" id="content">
     <h1>Avena 💜</h1>
@@ -107,6 +91,7 @@
 <script>
 let content = document.getElementById("content");
 
+/* NO BUTTON */
 function noClicked(){
     content.innerHTML = `
         <h1>Oops 😭💔</h1>
@@ -120,6 +105,7 @@ function noClicked(){
     `;
 }
 
+/* YES BUTTON */
 function yesClicked(){
     content.innerHTML = `
         <h1>Hehehe 💜</h1>
@@ -129,14 +115,12 @@ function yesClicked(){
     `;
 }
 
+/* FINAL YES */
 function finalYes(){
-    startGoldenConfetti();
     startPinkHearts();
 
     content.innerHTML = `
         <h1>Happy Valentine’s Day Baby 💜💗</h1>
-
-
         <p>
             You are the best thing that ever happened to me.<br>
             You make me smile every single day, without even trying.<br><br>
@@ -154,7 +138,7 @@ function finalYes(){
     `;
 }
 
-/* HEARTS */
+/* FLOATING HEARTS */
 function startPinkHearts(){
     setInterval(() => {
         let heart = document.createElement("div");
@@ -165,42 +149,6 @@ function startPinkHearts(){
         document.body.appendChild(heart);
         setTimeout(()=>heart.remove(),7000);
     }, 300);
-}
-
-/* GOLD CONFETTI (1.5 seconds) */
-function startGoldenConfetti(){
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let pieces = [];
-    for(let i=0;i<160;i++){
-        pieces.push({
-            x: Math.random()*canvas.width,
-            y: Math.random()*canvas.height,
-            r: Math.random()*6+4,
-            speed: Math.random()*3+2,
-            color: ['#FFD700','#FFC300','#FFB703'][Math.floor(Math.random()*3)]
-        });
-    }
-
-    let start = Date.now();
-
-    function draw(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        for(let p of pieces){
-            ctx.beginPath();
-            ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-            ctx.fillStyle=p.color;
-            ctx.fill();
-            p.y += p.speed;
-        }
-        if(Date.now() - start < 1500){
-            requestAnimationFrame(draw);
-        }
-    }
-    draw();
 }
 </script>
 
