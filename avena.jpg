@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Avena 💜</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f2d9ff, #fde7ff);
+        font-family: 'Poppins', sans-serif;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box {
+        background: white;
+        padding: 45px;
+        border-radius: 30px;
+        text-align: center;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        max-width: 480px;
+        width: 92%;
+        animation: pop 0.8s ease;
+    }
+
+    h1 {
+        color: #9d4edd;
+        font-size: 2em;
+        margin-bottom: 15px;
+    }
+
+    p {
+        color: #555;
+        font-size: 1.05em;
+        line-height: 1.7;
+    }
+
+    img {
+        width: 100%;
+        border-radius: 20px;
+        margin: 20px 0;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    button {
+        margin: 15px;
+        padding: 14px 36px;
+        border: none;
+        border-radius: 40px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: 0.3s;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .yes { background: #ff5d8f; color: white; }
+    .no { background: #eee; }
+
+    .yes:hover { transform: scale(1.1); background:#ff3d7f; }
+    .no:hover { transform: translateX(30px); }
+
+    .heart {
+        position: absolute;
+        bottom: -60px;
+        font-size: 34px;
+        animation: float 6s linear infinite;
+        opacity: 0.9;
+    }
+
+    @keyframes float {
+        from { transform: translateY(0); }
+        to { transform: translateY(-115vh); }
+    }
+
+    @keyframes pop {
+        from { transform: scale(0.85); opacity:0; }
+        to { transform: scale(1); opacity:1; }
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="box" id="content">
+    <h1>Avena 💜</h1>
+    <p>Will you be my Valentine’s, beboo?? 🥹💘</p>
+    <button class="yes" onclick="yesClicked()">YES 💖</button>
+    <button class="no" onclick="noClicked()">NO 😢</button>
+</div>
+
+<script>
+let content = document.getElementById("content");
+
+function noClicked(){
+    content.innerHTML = `
+        <h1>Oops 😭💔</h1>
+        <p>That answer broke my heart 🥺💗</p>
+        <p>Will you be my Valentine’s, beboo?? 💕</p>
+        <button class="yes" onclick="yesClicked()">YES 💖</button>
+        <button class="no" onclick="noClicked()">NO 😢</button>
+    `;
+}
+
+function yesClicked(){
+    content.innerHTML = `
+        <h1>Hehehe 💜</h1>
+        <p>Lock kiya jaye? 😏🔒</p>
+        <button class="yes" onclick="finalYes()">Hanji 💖</button>
+        <button class="yes" onclick="finalYes()">Hannnnjiiii 💕</button>
+    `;
+}
+
+function finalYes(){
+    startGoldenConfetti();
+    startPinkHearts();
+
+    content.innerHTML = `
+        <h1>Happy Valentine’s Day Baby 💜💗</h1>
+
+        <img src="avena.jpg" alt="Us 💜">
+
+        <p>
+            You are the best thing that ever happened to me.<br>
+            You make me smile every single day, without even trying.<br><br>
+
+            My partner, my friend, my safe place — my everything all in one.
+            With you, even ordinary moments feel magical.<br><br>
+
+            I’m grateful for you, for us, and for all the memories we’re yet to make.
+            I love you, today, tomorrow, and always 💗😘
+        </p>
+
+        <h1 style="margin-top:25px;">Date Invite 💌</h1>
+        <p>
+            Soooo… will you go on a Valentine’s date with me? 🥹🌹<br>
+            Good food, lots of laughs, and unlimited love — just us 💕
+        </p>
+    `;
+}
+
+/* HEARTS */
+function startPinkHearts(){
+    setInterval(() => {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = Math.random() > 0.5 ? "💗" : "❤️";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.animationDuration = (4 + Math.random()*3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),7000);
+    }, 300);
+}
+
+/* GOLD CONFETTI (1.5s) */
+function startGoldenConfetti(){
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let pieces = [];
+    for(let i=0;i<160;i++){
+        pieces.push({
+            x: Math.random()*canvas.width,
+            y: Math.random()*canvas.height,
+            r: Math.random()*6+4,
+            speed: Math.random()*3+2,
+            color: ['#FFD700','#FFC300','#FFB703'][Math.floor(Math.random()*3)]
+        });
+    }
+
+    let start = Date.now();
+
+    function draw(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for(let p of pieces){
+            ctx.beginPath();
+            ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+            ctx.fillStyle=p.color;
+            ctx.fill();
+            p.y += p.speed;
+        }
+        if(Date.now() - start < 1500){
+            requestAnimationFrame(draw);
+        }
+    }
+    draw();
+}
+</script>
+
+</body>
+</html>
