@@ -20,11 +20,11 @@
 
     .box {
         background: white;
-        padding: 45px;
-        border-radius: 30px;
+        padding: 50px;
+        border-radius: 32px;
         text-align: center;
         box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-        max-width: 480px;
+        max-width: 500px;
         width: 92%;
         animation: pop 0.8s ease;
     }
@@ -33,6 +33,7 @@
         color: #9d4edd;
         font-size: 2em;
         margin-bottom: 15px;
+        font-weight: 600;
     }
 
     p {
@@ -43,13 +44,13 @@
 
     img {
         width: 100%;
-        border-radius: 20px;
-        margin: 20px 0;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        border-radius: 22px;
+        margin: 22px 0;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.18);
     }
 
     button {
-        margin: 15px;
+        margin: 16px;
         padding: 14px 36px;
         border: none;
         border-radius: 40px;
@@ -109,7 +110,10 @@ let content = document.getElementById("content");
 function noClicked(){
     content.innerHTML = `
         <h1>Oops 😭💔</h1>
-        <p>That answer broke my heart 🥺💗</p>
+        <p>
+            That answer broke my heart 🥺💗<br>
+            But I’ll still ask again…
+        </p>
         <p>Will you be my Valentine’s, beboo?? 💕</p>
         <button class="yes" onclick="yesClicked()">YES 💖</button>
         <button class="no" onclick="noClicked()">NO 😢</button>
@@ -132,23 +136,21 @@ function finalYes(){
     content.innerHTML = `
         <h1>Happy Valentine’s Day Baby 💜💗</h1>
 
-        <img src="avena.jpg" alt="Us 💜">
+        <img src= https://raw.githubusercontent.com/username/repo/main/photo.jpg alt="Us 💜">
 
         <p>
             You are the best thing that ever happened to me.<br>
             You make me smile every single day, without even trying.<br><br>
 
             My partner, my friend, my safe place — my everything all in one.
-            With you, even ordinary moments feel magical.<br><br>
+            With you, even the simplest moments feel special.<br><br>
 
-            I’m grateful for you, for us, and for all the memories we’re yet to make.
-            I love you, today, tomorrow, and always 💗😘
-        </p>
+            Thank you for being you, for choosing me,
+            and for filling my life with love and warmth.
+            I can’t imagine my world without you.<br><br>
 
-        <h1 style="margin-top:25px;">Date Invite 💌</h1>
-        <p>
-            Soooo… will you go on a Valentine’s date with me? 🥹🌹<br>
-            Good food, lots of laughs, and unlimited love — just us 💕
+            Forever yours,<br>
+            <strong>Apka novro Joylan 💗</strong>
         </p>
     `;
 }
@@ -166,7 +168,7 @@ function startPinkHearts(){
     }, 300);
 }
 
-/* GOLD CONFETTI (1.5s) */
+/* GOLD CONFETTI (1.5 seconds) */
 function startGoldenConfetti(){
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
